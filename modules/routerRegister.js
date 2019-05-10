@@ -36,7 +36,18 @@ const registerSingleRoute = (route, router, source) => {
   router[method](path, routeWrapper(controller, _private));
 };
 
+const registerOpenApi = (mapping, app) => {
+  app.get(mapping.app.openApiUrl || '/open-api', (req, res) => {
+    const data = mapping.app.routes.map(route => {
+      delete route._private;
+      return route;
+    });
+    res.send(data);
+  });
+};
+
 const routerRegister = (app, mapping, source) => {
+  registerOpenApi(mapping, app);
   mapping.app.routes
     .forEach(route => registerSingleRoute(route, app, source));
 };
