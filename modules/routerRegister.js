@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 const { get, has } = require('lodash');
+const _path = require('path');
 const response = require('./response');
 
 const getParams = (source, req) => {
@@ -27,17 +28,17 @@ const routeWrapper = (method, { params, controller }) => async (req, res) => {
     .catch(error => response._.serverError(error, res, controller));
 };
 
-const registerSingleRoute = (route, router) => {
+const registerSingleRoute = (route, router, source) => {
   const { path, method, _private } = route;
-
-  const controller = require(`../src/controller/${_private.controller}`);
+  const controllerPath = _path.join(source, 'controller', _private.controller)
+  const controller = require(controllerPath);
 
   router[method](path, routeWrapper(controller, _private));
 };
 
-const routerRegister = (app, mapping) => {
+const routerRegister = (app, mapping, source) => {
   mapping.app.routes
-    .forEach(route => registerSingleRoute(route, app));
+    .forEach(route => registerSingleRoute(route, app, source));
 };
 
 module.exports = routerRegister;
