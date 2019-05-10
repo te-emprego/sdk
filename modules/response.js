@@ -1,9 +1,15 @@
 const res = {
-  send(data, status = 2000) {
+  send(data, status = 200) {
     return {
       status,
       data,
     };
+  },
+  error({ message, status }) {
+    return {
+      status,
+      data: { message }
+    }
   },
   _: {
     mount(info, res) {
