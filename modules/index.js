@@ -4,6 +4,7 @@ const database = require('./database');
 const res = require('./response');
 const log = require('./log');
 const path = require('./path');
+const token = require('./token');
 
 module.exports = {
   app,
@@ -12,4 +13,5 @@ module.exports = {
   res,
   log,
   path,
+  token,
 };
