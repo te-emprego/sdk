@@ -1,6 +1,6 @@
 {
   "name": "te-emprego-sdk",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "teemprego.com.br's official sdk",
   "main": "index.js",
   "scripts": {
