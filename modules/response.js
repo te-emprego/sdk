@@ -1,3 +1,5 @@
+const log = require('./log');
+
 const res = {
   send(data, status = 200) {
     return {
@@ -21,6 +23,7 @@ const res = {
     serverError(error, res, controller) {
       const { message } = error;
       console.log(`${controller} has Error: ${message}`);
+      log.debug(error);
       res
         .status(500)
         .send({ message });
