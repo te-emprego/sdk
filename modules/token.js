@@ -8,14 +8,19 @@ const token = {
    * @param {String} secret
    */
   async encode(toEncode) {
-    const options = {
-      expiresIn: '1h',
-    };
+    return new Promise((resolve, reject) => {
+      const options = {
+        expiresIn: '1h',
+      };
 
-    const encoded = jwt
-      .sign(toEncode, this.secret, options);
-
-    return encoded;
+      try {
+        const encoded = jwt
+          .sign(toEncode, this.secret, options);
+        resolve(encoded);
+      } catch (error) {
+        reject(error.message);
+      }
+    })
   },
 
   /**
@@ -24,12 +29,14 @@ const token = {
    * @param {String} secret
    */
   async decode(toDecode) {
-    try {
-      const decoded = jwt.decode(toDecode, this.secret);
-      return decoded;
-    } catch (error) {
-      throw Error(`Could not decode token. ${error.message}`);
-    }
+    return new Promise((resolve, reject) => {
+      try {
+        const decoded = jwt.decode(toDecode, this.secret);
+        resolve(decoded);
+      } catch (error) {
+        reject(`Could not decode token. ${error.message}`);
+      }
+    })
   },
 
   /**
@@ -38,12 +45,14 @@ const token = {
    * @param {String} secret
    */
   async verify(toVerify) {
-    try {
-      const verified = jwt.verify(toVerify, this.secret);
-      return verified;
-    } catch (error) {
-      throw Error(`Couldn't authenticate token. ${error.message}`);
-    }
+    return new Promise((resolve, reject) => {
+      try {
+        const verified = jwt.verify(toVerify, this.secret);
+        resolve(verified);
+      } catch (error) {
+        reject(`Couldn't authenticate token. ${error.message}`);
+      }
+    });
   },
 };
 
