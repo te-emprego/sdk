@@ -1,19 +1,26 @@
 {
   "name": "te-emprego-sdk",
   "version": "1.0.0",
-  "description": "SDK do Te Emprego",
-  "main": "lib/index.js",
+  "description": "teemprego.com.br's official sdk",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Daniel Bonifacio",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/te-emprego/sdk.git"
   },
+  "author": "Daniel Bonifacio <contato@danielbonifacio.com.br>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/te-emprego/sdk/issues"
+  },
+  "homepage": "https://github.com/te-emprego/sdk#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.5.7",
+    "winston": "^3.2.1"
   }
 }
