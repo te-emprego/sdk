@@ -15,6 +15,9 @@ const res = {
   },
   _: {
     mount(info, res) {
+      if (info === undefined) {
+        log.debug('Controller didn\'t return anything. Make sure to return something with `res.send()`')
+      }
       const { data, status } = info;
       return res
         .status(status)
@@ -23,7 +26,6 @@ const res = {
     serverError(error, res, controller) {
       const { message } = error;
       console.log(`${controller} has Error: ${message}`);
-      log.debug(error);
       res
         .status(500)
         .send({ message });

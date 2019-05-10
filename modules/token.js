@@ -7,6 +7,7 @@ const token = {
    * @param {String} secret
    */
   async encode(toEncode, secret) {
+    secret = secret || process.env.SECRET || 'development';
     const options = {
       expiresIn: '1h',
     };
